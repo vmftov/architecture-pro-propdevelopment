@@ -1,0 +1,209 @@
+# security-spec-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+    name: security-spec-cluster-role-binding
+subjects:
+    - kind: Group
+      name: security-spec-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: security-spec-cluster-role
+    apiGroup: rbac.authorization.k8s.io
+
+---
+# clients namespace ############################################
+# clients-dev-ops-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: clients-dev-ops-role-binding
+    namespace: clients
+subjects:
+    - kind: Group
+      name: clients-dev-ops-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: dev-ops-role-template
+    apiGroup: rbac.authorization.k8s.io
+
+---
+# clients-ops-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: clients-ops-role-binding
+    namespace: clients
+subjects:
+    - kind: Group
+      name: clients-ops-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: ops-role-template
+    apiGroup: rbac.authorization.k8s.io
+
+---
+# clients-developers-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: clients-developers-role-binding
+    namespace: clients
+subjects:
+    - kind: Group
+      name: clients-developers-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: developers-role-template
+    apiGroup: rbac.authorization.k8s.io
+
+---
+# tenant namespace ############################################
+# tenant-dev-ops-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: tenant-dev-ops-role-binding
+    namespace: tenant
+subjects:
+    - kind: Group
+      name: tenant-dev-ops-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: dev-ops-role-template
+    apiGroup: rbac.authorization.k8s.io
+
+---
+# tenant-ops-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: tenant-ops-role-binding
+    namespace: tenant
+subjects:
+    - kind: Group
+      name: tenant-ops-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: ops-role-template
+    apiGroup: rbac.authorization.k8s.io
+
+---
+# tenant-developers-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: tenant-developers-role-binding
+    namespace: tenant
+subjects:
+    - kind: Group
+      name: tenant-developers-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: developers-role-template
+    apiGroup: rbac.authorization.k8s.io
+
+---
+# accountant namespace ############################################
+# accountant-dev-ops-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: accountant-dev-ops-role-binding
+    namespace: accountant
+subjects:
+    - kind: Group
+      name: accountant-dev-ops-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: dev-ops-role-template
+    apiGroup: rbac.authorization.k8s.io
+
+---
+# accountant-ops-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: accountant-ops-role-binding
+    namespace: accountant
+subjects:
+    - kind: Group
+      name: accountant-ops-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: ops-role-template
+    apiGroup: rbac.authorization.k8s.io
+
+---
+# accountant-developers-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: accountant-developers-role-binding
+    namespace: accountant
+subjects:
+    - kind: Group
+      name: accountant-developers-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: developers-role-template
+    apiGroup: rbac.authorization.k8s.io
+
+---
+# data namespace ############################################
+# data-dev-ops-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: data-dev-ops-role-binding
+    namespace: data
+subjects:
+    - kind: Group
+      name: data-dev-ops-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: dev-ops-role-template
+    apiGroup: rbac.authorization.k8s.io
+
+---
+# data-ops-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: data-ops-role-binding
+    namespace: data
+subjects:
+    - kind: Group
+      name: data-ops-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: ops-role-template
+    apiGroup: rbac.authorization.k8s.io
+
+---
+# data-developers-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    name: data-developers-role-binding
+    namespace: data
+subjects:
+    - kind: Group
+      name: data-developers-group
+      apiGroup: rbac.authorization.k8s.io
+roleRef:
+    kind: ClusterRole
+    name: developers-role-template
+    apiGroup: rbac.authorization.k8s.io

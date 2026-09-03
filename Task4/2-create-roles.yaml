@@ -1,0 +1,48 @@
+# Кластерная роль для специалиста по ИБ
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+    name: security-spec-cluster-role
+rules:
+    - apiGroups: [""]
+      resources: ["secrets", "pods"]
+      verbs: ["get", "list", "watch"]
+
+---
+# Шаблон роли для DevOps-инженера домена
+# Используется одна ClusterRole с общими правилами,
+# но привязка затем осуществляется с помощью RoleBinding к пространству имён
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+    name: dev-ops-role-template
+rules:
+    - apiGroups: [""]
+      resources: ["secrets", "pods"]
+      verbs: ["get", "list", "watch", "create", "update", "delete"]
+
+---
+# Шаблон роли для инженеров по эксплуатации домена
+# Используется одна ClusterRole с общими правилами,
+# но привязка затем осуществляется с помощью RoleBinding к пространству имён
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+    name: ops-role-template
+rules:
+    - apiGroups: [""]
+      resources: ["pods"]
+      verbs: ["get", "list", "watch", "create", "update", "delete"]
+
+---
+# Шаблон роли для разработчиков домена
+# Используется одна ClusterRole с общими правилами,
+# но привязка затем осуществляется с помощью RoleBinding к пространству имён
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+    name: developers-role-template
+rules:
+    - apiGroups: [""]
+      resources: ["pods"]
+      verbs: ["get", "list", "watch"]
