@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-# Пользователи и группы ###########################################################
-
 export OPENSSL_CONF=$(cygpath -w /usr/ssl/openssl.cnf)
 CA_CRT=$(cygpath -w "$HOME/.minikube/ca.crt")
 CA_KEY=$(cygpath -w "$HOME/.minikube/ca.key")
@@ -34,11 +32,3 @@ create_user "ivan" "security-spec-group"
 create_user "petr" "clients-dev-ops-group"
 create_user "masha" "tenant-ops-group"
 create_user "varvara" "accountant-developers-group"
-echo ""
-
-# Пространства имён ###############################################################
-
-kubectl get ns clients >/dev/null 2>&1 || kubectl create namespace clients
-kubectl get ns tenant >/dev/null 2>&1 || kubectl create namespace tenant
-kubectl get ns accountant >/dev/null 2>&1 || kubectl create namespace accountant
-kubectl get ns data >/dev/null 2>&1 || kubectl create namespace data

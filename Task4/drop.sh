@@ -1,12 +1,8 @@
 #!/bin/bash
 
-kubectl delete -f ./2-create-roles.yaml
-kubectl delete -f ./3-create-role-bindings.yaml
-
-kubectl delete namespace clients
-kubectl delete namespace tenant
-kubectl delete namespace accountant
-kubectl delete namespace data
+kubectl delete -f ./4-create-role-bindings.yaml
+kubectl delete -f ./3-create-roles.yaml
+kubectl delete -f ./2-create-namespaces.yaml
 
 kubectl config delete-context ivan-context
 kubectl config delete-context petr-context
