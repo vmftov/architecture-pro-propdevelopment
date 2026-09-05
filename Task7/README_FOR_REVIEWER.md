@@ -2,15 +2,24 @@
 
 Запустите minikube:
 
-```
+```sh
 minikube start
+```
+
+Для запуска с аудитом необходимо использовать `audit-policy.yaml`, например:
+
+```sh
+minikube start `
+  --driver=virtualbox `
+  --extra-config=apiserver.audit-policy-file=/etc/ssl/certs/audit-policy.yaml `
+  --extra-config=apiserver.audit-log-path=-
 ```
 
 # Проверка PodSecurity Admission
 
 Чтобы проверить PodSecurity Admission, перейдите в директорию `Task7` и выполните скрипт:
 
-```
+```sh
 ./verify/verify-admission.sh
 ```
 
@@ -69,7 +78,7 @@ minikube start
 
 Чтобы проверить работу ограничений Gatekeeper, перейдите в директорию `Task7` и выполните скрипт:
 
-```
+```sh
 ./verify/validate-security.sh
 ```
 
@@ -128,3 +137,13 @@ minikube start
     **Данная ситуация говорит о том, что манифесты удовлетворяют всем требованиям Gatekeeper.**
 
 6. Удалит все созданные ресурсы
+
+# Аудит
+
+Чтобы определить события лога, отражающие отказ в создании пода из-за ошибок валидации, можно использовать команду:
+
+```sh
+jq 'select((.verb == "create" or .verb == "update" or .verb == "patch") and .objectRef.resource == "pods" and .objectRef.namespace == "audit-zone" and .responseStatus.status == "Failure" and .responseStatus.reason == "Forbidden")' audit.log
+```
+
+После чего уточнить причину отказа по значению `.responseStatus.message`.

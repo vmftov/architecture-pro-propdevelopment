@@ -26,7 +26,7 @@ kubectl create namespace audit-zone
 ###
 
 echo -e "\nИнициализация Gatekeeper"
-kubectl apply -f audit-policy.yaml
+kubectl apply -f init-gatekeeper.yaml
 sleep 10
 kubectl wait --for=condition=ready pod -l control-plane=controller-manager -n gatekeeper-system --timeout=120s
 
@@ -79,7 +79,7 @@ kubectl delete -f gatekeeper/constraints/
 kubectl delete -f gatekeeper/constraint-templates/
 
 echo -e "\nУдаление Gatekeeper"
-kubectl delete -f audit-policy.yaml
+kubectl delete -f init-gatekeeper.yaml
 
 ###
 
