@@ -1,0 +1,13 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredNoHostPathVolumes
+metadata:
+    name: disable-host-path
+spec:
+    match:
+        kinds:
+            - apiGroups: [""]
+              kinds: ["Pod"]
+            - apiGroups: ["apps"]
+              kinds: ["Deployment", "StatefulSet", "DaemonSet"]
+        namespaces:
+            - audit-zone
