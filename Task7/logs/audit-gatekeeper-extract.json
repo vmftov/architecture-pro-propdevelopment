@@ -1,0 +1,264 @@
+[
+    {
+        "kind": "Event",
+        "apiVersion": "audit.k8s.io/v1",
+        "level": "RequestResponse",
+        "auditID": "5a07ff18-f2e1-4ce7-b517-d1465cfb61bd",
+        "stage": "ResponseComplete",
+        "requestURI": "/api/v1/namespaces/audit-zone/pods?fieldManager=kubectl-client-side-apply&fieldValidation=Strict",
+        "verb": "create",
+        "user": {
+            "username": "minikube-user",
+            "groups": ["system:masters", "system:authenticated"],
+            "extra": {
+                "authentication.kubernetes.io/credential-id": ["X509SHA256=ff63f64de8cedeb07908fcffd1a60e12e81a7ebf23d74dc69e1ea53fe53be3de"]
+            }
+        },
+        "sourceIPs": ["192.168.59.1"],
+        "userAgent": "kubectl.exe/v1.36.2 (windows/amd64) kubernetes/24e2b02",
+        "objectRef": {
+            "resource": "pods",
+            "namespace": "audit-zone",
+            "name": "pod-privileged",
+            "apiVersion": "v1"
+        },
+        "responseStatus": {
+            "metadata": {},
+            "status": "Failure",
+            "message": "admission webhook \"validation.gatekeeper.sh\" denied the request: [disable-privileged] Container nginx must not be privileged",
+            "reason": "Forbidden",
+            "code": 403
+        },
+        "requestObject": {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "pod-privileged",
+                "namespace": "audit-zone",
+                "annotations": {
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Pod\",\"metadata\":{\"annotations\":{},\"name\":\"pod-privileged\",\"namespace\":\"audit-zone\"},\"spec\":{\"containers\":[{\"image\":\"nginx\",\"name\":\"nginx\",\"securityContext\":{\"privileged\":true,\"readOnlyRootFilesystem\":true,\"runAsNonRoot\":true}}]}}\n"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "nginx",
+                        "image": "nginx",
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "Always",
+                        "securityContext": {
+                            "privileged": true,
+                            "runAsNonRoot": true,
+                            "readOnlyRootFilesystem": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "securityContext": {},
+                "schedulerName": "default-scheduler",
+                "enableServiceLinks": true
+            },
+            "status": {}
+        },
+        "responseObject": {
+            "kind": "Status",
+            "apiVersion": "v1",
+            "metadata": {},
+            "status": "Failure",
+            "message": "admission webhook \"validation.gatekeeper.sh\" denied the request: [disable-privileged] Container nginx must not be privileged",
+            "reason": "Forbidden",
+            "code": 403
+        },
+        "requestReceivedTimestamp": "2026-09-05T01:39:52.627126Z",
+        "stageTimestamp": "2026-09-05T01:39:52.677831Z",
+        "annotations": {
+            "authorization.k8s.io/decision": "allow",
+            "authorization.k8s.io/reason": "",
+            "mutation.webhook.admission.k8s.io/round_0_index_0": "{\"configuration\":\"gatekeeper-mutating-webhook-configuration\",\"webhook\":\"mutation.gatekeeper.sh\",\"mutated\":false}",
+            "pod-security.kubernetes.io/enforce-policy": "privileged:latest"
+        }
+    },
+    {
+        "kind": "Event",
+        "apiVersion": "audit.k8s.io/v1",
+        "level": "RequestResponse",
+        "auditID": "e5f7653b-48ec-457b-a807-c4f0130e9bd1",
+        "stage": "ResponseComplete",
+        "requestURI": "/api/v1/namespaces/audit-zone/pods?fieldManager=kubectl-client-side-apply&fieldValidation=Strict",
+        "verb": "create",
+        "user": {
+            "username": "minikube-user",
+            "groups": ["system:masters", "system:authenticated"],
+            "extra": {
+                "authentication.kubernetes.io/credential-id": ["X509SHA256=ff63f64de8cedeb07908fcffd1a60e12e81a7ebf23d74dc69e1ea53fe53be3de"]
+            }
+        },
+        "sourceIPs": ["192.168.59.1"],
+        "userAgent": "kubectl.exe/v1.36.2 (windows/amd64) kubernetes/24e2b02",
+        "objectRef": {
+            "resource": "pods",
+            "namespace": "audit-zone",
+            "name": "pod-hostpath",
+            "apiVersion": "v1"
+        },
+        "responseStatus": {
+            "metadata": {},
+            "status": "Failure",
+            "message": "admission webhook \"validation.gatekeeper.sh\" denied the request: [disable-host-path] Container nginx must have readOnlyRootFilesystem setting\n[disable-host-path] hostPath volume host-root is not allowed",
+            "reason": "Forbidden",
+            "code": 403
+        },
+        "requestObject": {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "pod-hostpath",
+                "namespace": "audit-zone",
+                "annotations": {
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Pod\",\"metadata\":{\"annotations\":{},\"name\":\"pod-hostpath\",\"namespace\":\"audit-zone\"},\"spec\":{\"containers\":[{\"image\":\"nginx\",\"name\":\"nginx\",\"securityContext\":{\"runAsNonRoot\":true},\"volumeMounts\":[{\"mountPath\":\"/host\",\"name\":\"host-root\"}]}],\"volumes\":[{\"hostPath\":{\"path\":\"/\"},\"name\":\"host-root\"}]}}\n"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "host-root",
+                        "hostPath": {
+                            "path": "/",
+                            "type": ""
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "nginx",
+                        "image": "nginx",
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "host-root",
+                                "mountPath": "/host"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "Always",
+                        "securityContext": {
+                            "runAsNonRoot": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "securityContext": {},
+                "schedulerName": "default-scheduler",
+                "enableServiceLinks": true
+            },
+            "status": {}
+        },
+        "responseObject": {
+            "kind": "Status",
+            "apiVersion": "v1",
+            "metadata": {},
+            "status": "Failure",
+            "message": "admission webhook \"validation.gatekeeper.sh\" denied the request: [disable-host-path] Container nginx must have readOnlyRootFilesystem setting\n[disable-host-path] hostPath volume host-root is not allowed",
+            "reason": "Forbidden",
+            "code": 403
+        },
+        "requestReceivedTimestamp": "2026-09-05T01:39:52.967684Z",
+        "stageTimestamp": "2026-09-05T01:39:53.013818Z",
+        "annotations": {
+            "authorization.k8s.io/decision": "allow",
+            "authorization.k8s.io/reason": "",
+            "mutation.webhook.admission.k8s.io/round_0_index_0": "{\"configuration\":\"gatekeeper-mutating-webhook-configuration\",\"webhook\":\"mutation.gatekeeper.sh\",\"mutated\":false}",
+            "pod-security.kubernetes.io/enforce-policy": "privileged:latest"
+        }
+    },
+    {
+        "kind": "Event",
+        "apiVersion": "audit.k8s.io/v1",
+        "level": "RequestResponse",
+        "auditID": "dfb4ed80-bcbd-4025-8cc0-7cb8ecc6185f",
+        "stage": "ResponseComplete",
+        "requestURI": "/api/v1/namespaces/audit-zone/pods?fieldManager=kubectl-client-side-apply&fieldValidation=Strict",
+        "verb": "create",
+        "user": {
+            "username": "minikube-user",
+            "groups": ["system:masters", "system:authenticated"],
+            "extra": {
+                "authentication.kubernetes.io/credential-id": ["X509SHA256=ff63f64de8cedeb07908fcffd1a60e12e81a7ebf23d74dc69e1ea53fe53be3de"]
+            }
+        },
+        "sourceIPs": ["192.168.59.1"],
+        "userAgent": "kubectl.exe/v1.36.2 (windows/amd64) kubernetes/24e2b02",
+        "objectRef": {
+            "resource": "pods",
+            "namespace": "audit-zone",
+            "name": "pod-root-user",
+            "apiVersion": "v1"
+        },
+        "responseStatus": {
+            "metadata": {},
+            "status": "Failure",
+            "message": "admission webhook \"validation.gatekeeper.sh\" denied the request: [disable-root-user] Container nginx must run as non-root user",
+            "reason": "Forbidden",
+            "code": 403
+        },
+        "requestObject": {
+            "kind": "Pod",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "pod-root-user",
+                "namespace": "audit-zone",
+                "annotations": {
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Pod\",\"metadata\":{\"annotations\":{},\"name\":\"pod-root-user\",\"namespace\":\"audit-zone\"},\"spec\":{\"containers\":[{\"image\":\"nginx\",\"name\":\"nginx\",\"securityContext\":{\"readOnlyRootFilesystem\":true,\"runAsNonRoot\":false,\"runAsUser\":0}}]}}\n"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "nginx",
+                        "image": "nginx",
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "Always",
+                        "securityContext": {
+                            "runAsUser": 0,
+                            "runAsNonRoot": false,
+                            "readOnlyRootFilesystem": true
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "securityContext": {},
+                "schedulerName": "default-scheduler",
+                "enableServiceLinks": true
+            },
+            "status": {}
+        },
+        "responseObject": {
+            "kind": "Status",
+            "apiVersion": "v1",
+            "metadata": {},
+            "status": "Failure",
+            "message": "admission webhook \"validation.gatekeeper.sh\" denied the request: [disable-root-user] Container nginx must run as non-root user",
+            "reason": "Forbidden",
+            "code": 403
+        },
+        "requestReceivedTimestamp": "2026-09-05T01:39:53.312086Z",
+        "stageTimestamp": "2026-09-05T01:39:53.360986Z",
+        "annotations": {
+            "authorization.k8s.io/decision": "allow",
+            "authorization.k8s.io/reason": "",
+            "mutation.webhook.admission.k8s.io/round_0_index_0": "{\"configuration\":\"gatekeeper-mutating-webhook-configuration\",\"webhook\":\"mutation.gatekeeper.sh\",\"mutated\":false}",
+            "pod-security.kubernetes.io/enforce-policy": "privileged:latest"
+        }
+    }
+]

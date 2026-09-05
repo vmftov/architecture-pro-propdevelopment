@@ -1,0 +1,25 @@
+apiVersion: audit.k8s.io/v1
+kind: Policy
+omitStages:
+    - RequestReceived
+rules:
+    - level: RequestResponse
+      verbs: ["create", "delete", "update", "patch", "get", "list"]
+      resources:
+          - group: ""
+            resources: ["pods", "secrets", "configmaps", "serviceaccounts", "namespaces"]
+          - group: "rbac.authorization.k8s.io"
+            resources: ["roles", "rolebindings"]
+          - group: "admissionregistration.k8s.io"
+            resources: ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
+          - group: "templates.gatekeeper.sh"
+            resources: ["constrainttemplates"]
+          - group: "constraints.gatekeeper.sh"
+            resources: ["*"]
+          - group: "config.gatekeeper.sh"
+            resources: ["*"]
+          - group: "mutations.gatekeeper.sh"
+            resources: ["*"]
+          - group: "expansion.gatekeeper.sh"
+            resources: ["*"]
+    - level: Metadata
